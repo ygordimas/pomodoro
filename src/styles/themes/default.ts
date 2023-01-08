@@ -4,4 +4,5 @@ export const defaultTheme = {
   yellow: "#f5cb5c",
   "green-light": "#e8eddf",
   "green-medium": "#cfdbd5",
+  red: "#bf4342",
 };

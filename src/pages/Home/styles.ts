@@ -78,7 +78,7 @@ export const Separator = styled.div`
   padding: 2rem 0;
 `;
 
-export const StartButton = styled.button`
+export const BaseButton = styled.button`
   margin-top: 2rem;
   height: 4rem;
   width: 50%;
@@ -88,7 +88,6 @@ export const StartButton = styled.button`
   gap: 0.4rem;
   border-radius: 8px;
   cursor: pointer;
-  background-color: ${(props) => props.theme.yellow};
 
   &:disabled {
     background: ${(props) => props.theme["gray-light"]};
@@ -96,4 +95,12 @@ export const StartButton = styled.button`
     cursor: default;
     color: ${(props) => props.theme["green-medium"]};
   }
+`;
+
+export const StartButton = styled(BaseButton)`
+  background-color: ${(props) => props.theme.yellow};
+`;
+
+export const StopCountdownButton = styled(BaseButton)`
+  background-color: ${(props) => props.theme.red};
 `;
