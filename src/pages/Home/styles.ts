@@ -3,9 +3,7 @@ import { defaultTheme } from "../../styles/themes/default";
 
 export const HomeContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column;
+
   max-width: 74rem;
   padding-top: 5rem;
   margin: 0 auto;
@@ -18,6 +16,14 @@ export const FormContainer = styled.form`
   color: ${defaultTheme["green-light"]};
   line-height: 2.5rem;
   width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+
+  header {
+    text-align: center;
+    letter-spacing: 0.08rem;
+  }
 `;
 
 const BaseInput = styled.input`
@@ -34,6 +40,7 @@ const BaseInput = styled.input`
 
 export const TaskInput = styled(BaseInput)`
   flex: 1;
+  width: 24rem;
 `;
 
 export const MinutesInput = styled(BaseInput)`
@@ -82,4 +89,11 @@ export const StartButton = styled.button`
   border-radius: 8px;
   cursor: pointer;
   background-color: ${(props) => props.theme.yellow};
+
+  &:disabled {
+    background: ${(props) => props.theme["gray-light"]};
+    border: 0;
+    cursor: default;
+    color: ${(props) => props.theme["green-medium"]};
+  }
 `;

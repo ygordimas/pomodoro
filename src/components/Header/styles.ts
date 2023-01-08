@@ -17,6 +17,12 @@ export const StyledHeader = styled.div`
       place-items: center;
       text-decoration: none;
       color: ${defaultTheme["gray-dark"]};
+      padding: 0.5rem;
+
+      &.active {
+        background-color: ${(props) => props.theme["green-light"]};
+        border-radius: 999px;
+      }
 
       span {
         position: relative;
