@@ -7,12 +7,12 @@ import {
   useEffect,
 } from "react";
 import {
-  ActionTypes,
   addNewCycleAction,
   interruptCurrentCycleAction,
   markCurrentCycleAsFinishedAction,
 } from "../reducers/cycles/actions";
 import { Cycle, cyclesReducer } from "../reducers/cycles/reducer";
+import { initialStorage } from "../assets/initialStorage";
 
 interface CreateCycleData {
   task: string;
@@ -41,19 +41,25 @@ export function CyclesContextProvider({
   const [cyclesState, dispatch] = useReducer(
     cyclesReducer,
     {
-      cycles: [],
+      cycles: initialStorage.cycles,
       activeCycleId: null,
     },
-    () => {
+    (initialValue) => {
       const storedStateAsJSON = localStorage.getItem(
         "@pomodoro:cycles-state-1.0.0"
       );
 
-      if (storedStateAsJSON) {
-        return JSON.parse(storedStateAsJSON);
-      }
+      if (!storedStateAsJSON) return initialValue;
+
+      return JSON.parse(storedStateAsJSON);
     }
   );
+
+  useEffect(() => {
+    const stateJSON = JSON.stringify(cyclesState);
+
+    localStorage.setItem("@pomodoro:cycles-state-1.0.0", stateJSON);
+  }, [cyclesState]);
 
   const { cycles, activeCycleId } = cyclesState;
   const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId);
@@ -66,12 +72,6 @@ export function CyclesContextProvider({
 
     return 0;
   });
-
-  useEffect(() => {
-    const stateJSON = JSON.stringify(cyclesState);
-
-    localStorage.setItem("@pomodoro:cycles-state-1.0.0", stateJSON);
-  }, [cyclesState]);
 
   function createNewCycle(data: CreateCycleData) {
     const id = String(new Date().getTime());

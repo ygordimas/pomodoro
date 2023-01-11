@@ -13,6 +13,7 @@ export const FormContainer = styled.div`
   header {
     text-align: center;
     letter-spacing: 0.08rem;
+    color: ${(props) => props.theme.yellow};
   }
 `;
 
